@@ -211,9 +211,9 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
         let finalPrediction: string;
 
         if (isRare) {
-          finalPrediction = (Math.random() * (3.90 - 2.10) + 2.10).toFixed(2);
+          finalPrediction = (Math.random() * (3.10 - 2.20) + 2.20).toFixed(2);
         } else {
-          finalPrediction = (Math.random() * (2.10 - 1.10) + 1.10).toFixed(2);
+          finalPrediction = (Math.random() * (2.20 - 1.10) + 1.10).toFixed(2);
         }
         
         setPrediction(`${finalPrediction}x`);
