@@ -24,7 +24,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const t = useCallback((key: string, vars?: { [key: string]: string | number }): string => {
     const selectedLangInfo = languages.find(l => l.code === language) || languages.find(l => l.code === 'en')!;
-    const currency = selectedLangInfo.currency;
+    
+    // If language is 'en' or 'hi', always use INR. Otherwise, use the currency defined for the language.
+    const currencyToUse = (language === 'en' || language === 'hi') 
+      ? 'INR' 
+      : selectedLangInfo.currency;
 
     let translation = translations[language]?.[key] || translations['en']?.[key] || key;
 
@@ -36,12 +40,12 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
 
     const formatCurrency = (amountInr: number): string => {
-        const selectedCurrency = currencyData[currency];
+        const selectedCurrency = currencyData[currencyToUse];
         if (selectedCurrency) {
           const convertedAmount = amountInr * selectedCurrency.rate;
           const roundedAmount = Math.round(convertedAmount);
           // Special formatting for currencies that typically don't use decimals
-          if (['IDR', 'VND', 'JPY', 'KRW', 'UZS', 'HUF'].map(c => c.toLowerCase()).includes(currency.toLowerCase())) {
+          if (['IDR', 'VND', 'JPY', 'KRW', 'UZS', 'HUF'].map(c => c.toLowerCase()).includes(currencyToUse.toLowerCase())) {
             return `${selectedCurrency.symbol}${roundedAmount.toLocaleString('en-US')}`;
           }
           return `${selectedCurrency.symbol}${roundedAmount}`;
