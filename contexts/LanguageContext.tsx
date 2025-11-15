@@ -62,8 +62,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     
     // Base amount for first deposit is 1000 INR
     translation = translation.replace(/{{minDepositAmount}}/g, formatCurrency(1000));
-    // Base amount for re-deposit is 400 INR (approx $5)
-    translation = translation.replace(/{{minReDepositAmount}}/g, formatCurrency(400));
+    // Base amount for re-deposit is 500 INR (approx $5)
+    translation = translation.replace(/{{minReDepositAmount}}/g, formatCurrency(500));
 
     return translation;
   }, [language, currency]);
