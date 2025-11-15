@@ -18,18 +18,6 @@ const MenuIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-const UserIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-  </svg>
-);
-
-const GuideIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-  </svg>
-);
-
 
 // --- Sub-components moved outside and memoized for performance ---
 
@@ -51,104 +39,116 @@ const LimitReachedView = React.memo(({ handleDepositRedirect }: { handleDepositR
 
 
 const PredictorView = React.memo((props: {
-    user: User;
-    profilePic: string | null;
-    currentTime: string;
-    predictionsLeft: number;
+    onOpenSidebar: () => void;
     displayValue: string;
-    prediction: string | null;
-    accuracy: number | null;
     isPredicting: boolean;
     isRoundComplete: boolean;
-    onOpenGuide: () => void;
-    onOpenSidebar: () => void;
     onGetSignal: () => void;
     onNextRound: () => void;
 }) => {
-  const { t } = useLanguage();
-  return (
-     <div className="w-full h-full flex flex-col">
-       <header className="flex justify-between items-center">
-        <div className="flex items-center gap-3">
-             <div className="w-12 h-12 flex-shrink-0 bg-gray-100 border-2 border-gray-200 rounded-full flex items-center justify-center">
-                {props.profilePic ? (
-                    <img src={props.profilePic} alt={t('profileAlt')} className="w-full h-full rounded-full object-cover" draggable="false" onContextMenu={(e) => e.preventDefault()} />
-                ) : (
-                    <UserIcon className="w-8 h-8 text-red-400" />
-                )}
-            </div>
-            <div>
-                <p className="font-bold text-lg truncate max-w-40 text-gray-800">{t('welcomeUser', { playerId: props.user.playerId })}</p>
-                <p className="text-sm text-gray-500">Aviator Predictor Pro</p>
-                <p className="text-xs text-gray-400 mt-1 font-mono">{props.currentTime}</p>
-            </div>
-        </div>
-        <div className="flex items-center gap-2">
-            <button onClick={props.onOpenGuide} className="p-2 rounded-full text-gray-600 hover:bg-red-100" aria-label={t('openGuide')}>
-                <GuideIcon className="w-6 h-6" />
-            </button>
-            <button onClick={props.onOpenSidebar} className="p-2 rounded-full text-gray-600 hover:bg-red-100" aria-label={t('openMenu')}>
-                <MenuIcon className="w-6 h-6" />
-            </button>
-        </div>
-      </header>
+    const { t } = useLanguage();
 
-      <main className="flex-grow flex flex-col items-center justify-center text-center">
-        <div className={`relative w-48 h-48 md:w-56 md:h-56 rounded-full flex items-center justify-center transition-all duration-300
-          ${props.prediction ? 'bg-red-100 border-4 border-red-500' : 
-            'bg-red-50 border-4 border-red-300 animate-pulse'}`}>
-          <div className="flex flex-col items-center justify-center">
-            {props.prediction && (
-                <div className="bg-red-500 px-4 py-1 rounded-full mb-2 shadow-md">
-                    <p className="text-sm font-bold text-white tracking-widest uppercase">{t('flewAway')}</p>
-                </div>
-            )}
-            <p className={`font-bold font-mono transition-colors duration-300 whitespace-nowrap
-                ${props.prediction ? 'text-5xl md:text-6xl text-red-500' : 
-                  `text-4xl md:text-5xl ${props.isPredicting ? 'text-gray-400' : 'text-gray-800'}`
-                }`}>
-                {props.displayValue}
-            </p>
-          </div>
-        </div>
+    useEffect(() => {
+        const sparkleContainer = document.getElementById('sparkles');
+        if (!sparkleContainer) return;
+
+        // Prevent adding sparkles if they already exist
+        if (sparkleContainer.children.length > 0) return;
         
-        <div className="w-full">
-            <div className="mt-6 w-full max-w-xs h-24 flex items-center justify-center mx-auto">
-                {props.accuracy && props.prediction ? (
-                    <div className="w-full p-4 bg-red-50 border border-red-200 rounded-lg">
-                        <p className="text-red-600 font-bold text-xl">{t('accuracy')}: {props.accuracy}%</p>
-                        <p className="text-gray-700 text-sm mt-1">{t('cashoutBefore')} 👉🏻 {props.prediction}</p>
-                    </div>
-                ) : null}
-            </div>
-        </div>
-      </main>
+        const sparkleCount = 40;
+        for (let i = 0; i < sparkleCount; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.top = `${Math.random() * 100}%`;
+            sparkle.style.left = `${Math.random() * 100}%`;
+            const delay = Math.random() * 5;
+            const duration = Math.random() * 3 + 2;
+            sparkle.style.animation = `sparkle-anim ${duration}s linear ${delay}s infinite`;
+            sparkleContainer.appendChild(sparkle);
+        }
+    }, []);
 
-      <footer className="space-y-3">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <button 
-            onClick={props.onGetSignal}
-            disabled={props.isPredicting || props.isRoundComplete}
-            className="w-full py-3 bg-[#f8d7da] rounded-xl text-[#e51e2a] font-russo font-bold text-xl tracking-wider hover:bg-[#f6c8cc] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
-          >
-            {props.isPredicting ? t('predicting') : t('getSignal')}
-          </button>
-          <button 
-            onClick={props.onNextRound}
-            disabled={!props.isRoundComplete || props.isPredicting}
-            className="w-full py-3 bg-transparent border-2 border-[#e51e2a] rounded-xl text-[#e51e2a] font-russo font-bold text-lg hover:bg-red-50 disabled:opacity-70 transition duration-300"
-          >
-            {t('nextRound')}
-          </button>
+    const buttonAction = props.isRoundComplete ? props.onNextRound : props.onGetSignal;
+    const buttonText = props.isRoundComplete ? t('nextRound') : (props.isPredicting ? t('predicting') : t('getSignal'));
+    const isButtonDisabled = props.isPredicting;
+
+    return (
+        <div className="w-full h-full flex flex-col items-center justify-between relative overflow-hidden p-6 font-russo text-white">
+            <div id="sparkles" className="absolute inset-0 pointer-events-none z-0"></div>
+            <style>{`
+                @keyframes sparkle-anim {
+                  0%, 100% { transform: scale(0); opacity: 0; }
+                  50% { transform: scale(1); opacity: 1; }
+                  99% { opacity: 0; }
+                }
+                .sparkle {
+                  position: absolute;
+                  width: 3px;
+                  height: 3px;
+                  background: rgba(255, 100, 100, 0.8);
+                  border-radius: 50%;
+                  box-shadow: 0 0 5px rgba(255, 100, 100, 1);
+                }
+                @keyframes pulse-slow {
+                  0%, 100% { box-shadow: 0 0 10px 0px rgba(255, 82, 82, 0.3); opacity: 0.8; transform: scale(1); }
+                  50% { box-shadow: 0 0 25px 8px rgba(255, 82, 82, 0.6); opacity: 1; transform: scale(1.02); }
+                }
+                @keyframes pulse-medium {
+                  0%, 100% { opacity: 0.7; }
+                  50% { opacity: 1; }
+                }
+            `}</style>
+
+            <header className="w-full flex justify-between items-start z-10">
+                <h1 className="text-4xl sm:text-5xl font-bold tracking-wider leading-tight" style={{textShadow: '0 0 10px rgba(255,255,255,0.3)'}}>
+                    Aviator<br/>Predictor
+                </h1>
+                <button onClick={props.onOpenSidebar} className="p-2 text-white" aria-label={t('openMenu')}>
+                    <MenuIcon className="w-8 h-8" />
+                </button>
+            </header>
+
+            <main className="flex-grow flex flex-col items-center justify-center z-10 w-full my-4">
+                <img 
+                  src="https://i.postimg.cc/FzvNHVnG/Picsart-25-11-15-11-35-00-149.png" 
+                  alt="Aviator Plane" 
+                  className="w-full max-w-sm drop-shadow-[0_10px_15px_rgba(255,50,50,0.3)] select-none"
+                  draggable="false" onContextMenu={(e) => e.preventDefault()}
+                />
+
+                <div className="relative w-48 h-48 md:w-56 md:h-56 flex items-center justify-center mt-8">
+                    <div 
+                        className="absolute inset-0 rounded-full border-4 border-red-500/30 animate-pulse-slow"
+                        style={{animationDuration: '3s'}}
+                    ></div>
+                    <div 
+                        className="absolute w-[85%] h-[85%] rounded-full border-4 border-red-500/50 animate-pulse-medium"
+                        style={{animation: 'pulse-medium 2s ease-in-out infinite reverse'}}
+                    ></div>
+                    <div className="absolute w-[70%] h-[70%] bg-red-900/20 rounded-full"></div>
+
+                    <p className={`font-bold font-mono transition-colors duration-300 whitespace-nowrap text-5xl md:text-6xl ${props.isRoundComplete ? 'text-white' : 'text-gray-300'}`} style={{textShadow: '0 0 20px rgba(255, 100, 100, 0.9)'}}>
+                        {props.displayValue}
+                    </p>
+                </div>
+            </main>
+
+            <footer className="w-full max-w-sm z-10 py-4">
+                <button 
+                    onClick={buttonAction}
+                    disabled={isButtonDisabled}
+                    className="w-full py-4 bg-gradient-to-b from-red-500 to-red-700 rounded-xl text-white font-russo font-bold text-2xl tracking-wider uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_5px_20px_rgba(255,82,82,0.5)] hover:shadow-[0_5px_30px_rgba(255,82,82,0.7)] hover:scale-105 active:scale-100"
+                >
+                    {buttonText}
+                </button>
+            </footer>
         </div>
-      </footer>
-     </div>
-  );
+    );
 });
+
 
 const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => {
   const [prediction, setPrediction] = useState<string | null>(null);
-  const [accuracy, setAccuracy] = useState<number | null>(null);
   const [isPredicting, setIsPredicting] = useState(false);
   const [displayValue, setDisplayValue] = useState("?.??x");
   const [predictionsLeft, setPredictionsLeft] = useState(user.predictionsLeft);
@@ -156,7 +156,6 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
   const [currentView, setCurrentView] = useState('predictor'); // 'predictor' or 'testPostback'
   const [isRoundComplete, setIsRoundComplete] = useState(false);
   const [profilePic, setProfilePic] = useState<string | null>(null);
-  const [currentTime, setCurrentTime] = useState<string>('');
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const intervalRef = useRef<number | null>(null);
@@ -170,16 +169,6 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
       setProfilePic(null);
     }
   }, [user.playerId]);
-
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString('en-US', { hour12: false }));
-    }, 1000);
-
-    return () => {
-      clearInterval(timerId);
-    };
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -208,7 +197,6 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
       
       setPredictionsLeft(prev => prev - 1);
       setPrediction(null);
-      setAccuracy(null);
       setIsRoundComplete(false);
 
       intervalRef.current = window.setInterval(() => {
@@ -227,11 +215,8 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
         } else {
           finalPrediction = (Math.random() * (2.10 - 1.10) + 1.10).toFixed(2);
         }
-
-        const finalAccuracy = Math.floor(Math.random() * (99 - 78 + 1) + 78);
         
         setPrediction(`${finalPrediction}x`);
-        setAccuracy(finalAccuracy);
         setDisplayValue(`${finalPrediction}x`);
         setIsPredicting(false);
         setIsRoundComplete(true);
@@ -247,7 +232,6 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
   const handleNextRound = useCallback(() => {
     if (isPredicting) return;
     setPrediction(null);
-    setAccuracy(null);
     setDisplayValue("0.00x");
     setIsRoundComplete(false);
   }, [isPredicting]);
@@ -278,12 +262,20 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
   const handleAdminClose = useCallback(() => setShowAdminModal(false), []);
   const handleBackToPredictor = useCallback(() => setCurrentView('predictor'), []);
 
+  const mainContainerClasses = currentView === 'predictor'
+    ? "w-full min-h-screen bg-gradient-to-b from-[#3a0a0f] to-[#1a0204]"
+    : "w-full min-h-screen bg-gradient-to-b from-[#3a0a0f] to-[#1a0204] flex items-center justify-center p-4";
+
   if (predictionsLeft <= 0 && !isPredicting) {
-    return <LimitReachedView handleDepositRedirect={handleDepositRedirect} />;
+    return (
+        <div className={mainContainerClasses}>
+            <LimitReachedView handleDepositRedirect={handleDepositRedirect} />
+        </div>
+    );
   }
   
   return (
-    <div className="w-full max-w-md h-[90vh] max-h-[700px] flex flex-col p-6 bg-white text-gray-800 rounded-2xl shadow-2xl relative">
+    <div className={mainContainerClasses}>
       {isGuideOpen && <GuideModal onClose={() => setIsGuideOpen(false)} />}
       {showAdminModal && <AdminAuthModal onSuccess={handleAdminSuccess} onClose={handleAdminClose} />}
       <Sidebar 
@@ -298,22 +290,19 @@ const PredictorScreen: React.FC<PredictorScreenProps> = ({ user, onLogout }) => 
       />
       {currentView === 'predictor' && (
         <PredictorView 
-            user={user}
-            profilePic={profilePic}
-            currentTime={currentTime}
-            predictionsLeft={predictionsLeft}
             displayValue={displayValue}
-            prediction={prediction}
-            accuracy={accuracy}
             isPredicting={isPredicting}
             isRoundComplete={isRoundComplete}
-            onOpenGuide={() => setIsGuideOpen(true)}
             onOpenSidebar={() => setIsSidebarOpen(true)}
             onGetSignal={handleGetSignal}
             onNextRound={handleNextRound}
         />
       )}
-      {currentView === 'testPostback' && <TestPostbackScreen onBack={handleBackToPredictor} />}
+      {currentView === 'testPostback' && 
+        <div className="w-full max-w-md h-[90vh] max-h-[700px] flex flex-col p-6 bg-white text-gray-800 rounded-2xl shadow-2xl relative">
+            <TestPostbackScreen onBack={handleBackToPredictor} />
+        </div>
+      }
     </div>
   );
 };
