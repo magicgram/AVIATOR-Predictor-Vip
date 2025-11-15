@@ -1,11 +1,9 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
-import { translations, currencyData } from '../lib/i18n';
+import { translations, currencyData, languages } from '../lib/i18n';
 
 interface LanguageContextType {
   language: string;
   setLanguage: (language: string) => void;
-  currency: string;
-  setCurrency: (currency: string) => void;
   t: (key: string, vars?: { [key: string]: string | number }) => string;
 }
 
@@ -15,27 +13,19 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [language, setLanguageState] = useState<string>(() => {
     return localStorage.getItem('language') || 'en';
   });
-  const [currency, setCurrencyState] = useState<string>(() => {
-    return localStorage.getItem('currency') || 'INR';
-  });
 
   useEffect(() => {
     localStorage.setItem('language', language);
   }, [language]);
 
-  useEffect(() => {
-    localStorage.setItem('currency', currency);
-  }, [currency]);
-
   const setLanguage = (langCode: string) => {
     setLanguageState(langCode);
   };
 
-  const setCurrency = (currencyCode: string) => {
-    setCurrencyState(currencyCode);
-  };
-
   const t = useCallback((key: string, vars?: { [key: string]: string | number }): string => {
+    const selectedLangInfo = languages.find(l => l.code === language) || languages.find(l => l.code === 'en')!;
+    const currency = selectedLangInfo.currency;
+
     let translation = translations[language]?.[key] || translations['en']?.[key] || key;
 
     if (vars) {
@@ -66,10 +56,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     translation = translation.replace(/{{minReDepositAmount}}/g, formatCurrency(500));
 
     return translation;
-  }, [language, currency]);
+  }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, currency, setCurrency, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
