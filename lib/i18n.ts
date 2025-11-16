@@ -1,4 +1,5 @@
 
+
 export const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸', currency: 'USD' },
   { code: 'ar', name: 'العربية', flag: '🇸🇦', currency: 'SAR' },
@@ -186,6 +187,12 @@ const commonTranslations = {
     copy: 'Copy',
     copied: 'Copied!',
     viewSetupGuide: 'VIEW SETUP GUIDE',
+    updatePromoCode: 'Update Promo Code',
+    newPromoCode: 'New Promo Code',
+    adminPassword: 'Admin Password',
+    updatePromocodeButton: 'Update Promocode',
+    updating: 'Updating...',
+    fillBothFields: 'Please fill in both fields.',
 };
 
 
@@ -293,6 +300,12 @@ export const translations: Translations = {
     copy: 'कॉपी',
     copied: 'कॉपी किया गया!',
     viewSetupGuide: 'सेटअप गाइड देखें',
+    updatePromoCode: 'प्रोमो कोड अपडेट करें',
+    newPromoCode: 'नया प्रोमो कोड',
+    adminPassword: 'एडमिन पासवर्ड',
+    updatePromocodeButton: 'प्रोमोकोड अपडेट करें',
+    updating: 'अपडेट हो रहा है...',
+    fillBothFields: 'कृपया दोनों फ़ील्ड भरें।',
   } },
   bn: { ...commonTranslations, ...{
     unlockPredictions: 'ভবিষ্যদ্বাণী আনলক করুন',
@@ -396,6 +409,12 @@ export const translations: Translations = {
     copy: 'অনুলিপি করুন',
     copied: 'অনুলিপি করা হয়েছে!',
     viewSetupGuide: 'সেটআপ গাইড দেখুন',
+    updatePromoCode: 'প্রচার কোড আপডেট করুন',
+    newPromoCode: 'নতুন প্রচার কোড',
+    adminPassword: 'অ্যাডমিন পাসওয়ার্ড',
+    updatePromocodeButton: 'প্রচার কোড আপডেট করুন',
+    updating: 'আপডেট করা হচ্ছে...',
+    fillBothFields: 'অনুগ্রহ করে উভয় ক্ষেত্র পূরণ করুন।',
   } },
   hu: { ...commonTranslations, ...{
     unlockPredictions: 'Jóslatok feloldása',
@@ -499,5 +518,11 @@ export const translations: Translations = {
     copy: 'Másolás',
     copied: 'Másolva!',
     viewSetupGuide: 'BEÁLLÍTÁSI ÚTMUTATÓ MEGTEKINTÉSE',
+    updatePromoCode: 'Promóciós kód frissítése',
+    newPromoCode: 'Új promóciós kód',
+    adminPassword: 'Admin jelszó',
+    updatePromocodeButton: 'Promóciós kód frissítése',
+    updating: 'Frissítés...',
+    fillBothFields: 'Kérjük, töltse ki mindkét mezőt.',
   } },
 };

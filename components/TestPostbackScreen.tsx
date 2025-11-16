@@ -22,6 +22,14 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
+  
+  // State for the new promo code form
+  const [newPromoCode, setNewPromoCode] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updateMessage, setUpdateMessage] = useState<string | null>(null);
+  const [updateError, setUpdateError] = useState<string | null>(null);
+  
   const { t } = useLanguage();
 
   const handleAction = async (action: (id: string, amount?: any) => Promise<string>, amount?: number) => {
@@ -44,6 +52,40 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
         console.error(err);
     } finally {
         setIsLoading(false);
+    }
+  };
+
+  const handleUpdatePromoCode = async () => {
+    if (!newPromoCode || !adminPassword) {
+      setUpdateError(t('fillBothFields'));
+      return;
+    }
+    setIsUpdating(true);
+    setUpdateMessage(null);
+    setUpdateError(null);
+
+    try {
+      const response = await fetch('/api/set-promo-code', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ promoCode: newPromoCode, password: adminPassword }),
+      });
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setUpdateMessage(result.message);
+        setNewPromoCode('');
+        setAdminPassword('');
+      } else {
+        setUpdateError(result.message || 'An unknown error occurred.');
+      }
+    } catch (err) {
+      setUpdateError(t('unexpectedErrorOccurred'));
+      console.error(err);
+    } finally {
+      setIsUpdating(false);
     }
   };
   
@@ -133,6 +175,57 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
             className="w-full py-3 bg-transparent border-2 border-gray-400 rounded-xl text-gray-500 font-russo font-bold text-lg hover:bg-gray-100 disabled:opacity-70 transition duration-300"
           >
             {t('clearUserData')}
+          </button>
+        </div>
+        
+        {/* --- NEW PROMO CODE SECTION --- */}
+        <div className="w-1/2 h-px bg-red-200 my-6 mx-auto"></div>
+        <div className="space-y-4 pb-4">
+          <h2 className="text-center font-russo text-lg text-gray-700">{t('updatePromoCode')}</h2>
+          <div>
+            <label htmlFor="newPromoCode" className="text-sm font-semibold text-gray-600 font-poppins">
+              {t('newPromoCode')}
+            </label>
+            <input
+              id="newPromoCode"
+              type="text"
+              value={newPromoCode}
+              onChange={(e) => setNewPromoCode(e.target.value)}
+              placeholder="NEWPROMO25"
+              className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-400 transition duration-300"
+            />
+          </div>
+          <div>
+            <label htmlFor="adminPassword" className="text-sm font-semibold text-gray-600 font-poppins">
+              {t('adminPassword')}
+            </label>
+            <input
+              id="adminPassword"
+              type="password"
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+              placeholder="••••••••"
+              className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-400 transition duration-300"
+            />
+          </div>
+
+          {updateError && (
+            <div className="p-3 rounded-lg text-center text-sm bg-red-100 text-red-700 border border-red-200">
+              {updateError}
+            </div>
+          )}
+          {updateMessage && (
+            <div className="p-3 rounded-lg text-center text-sm bg-green-100 text-green-700 border border-green-200">
+              {updateMessage}
+            </div>
+          )}
+
+          <button
+            onClick={handleUpdatePromoCode}
+            disabled={isUpdating}
+            className="w-full py-3 bg-[#e51e2a] rounded-xl text-white font-russo font-bold text-lg hover:bg-red-700 disabled:opacity-70 transition duration-300"
+          >
+            {isUpdating ? t('updating') : t('updatePromocodeButton')}
           </button>
         </div>
       </div>

@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const CopyIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
@@ -20,10 +21,30 @@ interface GuideModalProps {
 
 const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
     const [copied, setCopied] = useState(false);
+    const [promoCode, setPromoCode] = useState<string>('...');
     const { t } = useLanguage();
 
+    useEffect(() => {
+        const fetchPromoCode = async () => {
+            try {
+                const response = await fetch('/api/get-promo-code');
+                const data = await response.json();
+                if (data.success && data.promoCode) {
+                    setPromoCode(data.promoCode);
+                } else {
+                    setPromoCode('OGGY'); // Fallback
+                }
+            } catch (error) {
+                console.error('Failed to fetch promo code:', error);
+                setPromoCode('OGGY'); // Fallback on error
+            }
+        };
+        fetchPromoCode();
+    }, []);
+
     const handleCopy = () => {
-        navigator.clipboard.writeText('OGGY').then(() => {
+        if (promoCode === '...') return;
+        navigator.clipboard.writeText(promoCode).then(() => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         });
@@ -60,7 +81,7 @@ const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
                 <div className="flex-grow">
                 <p>{t('guideStep4')}</p>
                 <div className="mt-2 flex items-center justify-between bg-red-100 p-2 rounded-md">
-                    <span className="font-mono text-lg text-red-600 font-bold">OGGY</span>
+                    <span className="font-mono text-lg text-red-600 font-bold">{promoCode}</span>
                     <button onClick={handleCopy} className="p-1 text-gray-500 hover:text-red-500 transition-colors" aria-label={t('copyPromocode')}>
                         {copied ? <CheckIcon className="w-5 h-5 text-green-500" /> : <CopyIcon className="w-5 h-5" />}
                     </button>
