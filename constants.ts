@@ -23,6 +23,6 @@
 // To change it, go to your project settings on Vercel, navigate to the
 // "Environment Variables" section, and set the value for `AFFILIATE_LINK`.
 //
-// The code that uses this variable is in: `/api/redirect.ts`
+// The code that uses this variable is in: `/api/get-affiliate-link.ts`
 //
 // =================================================================================
