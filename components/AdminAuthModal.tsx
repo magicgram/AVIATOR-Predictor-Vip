@@ -43,10 +43,10 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ onClose, onSuccess }) =
   };
 
   return (
-    <div className="fixed inset-0 bg-red-900/30 backdrop-blur-sm z-50 flex items-center justify-center p-4" aria-modal="true" role="dialog">
-      <div className="w-full max-w-sm bg-white text-gray-800 rounded-2xl p-6 md:p-8 flex flex-col animate-fade-in shadow-2xl">
-        <h1 className="text-2xl font-russo text-center text-[#e51e2a] mb-2 uppercase">{t('adminAccess')}</h1>
-        <p className="text-center text-gray-500 mb-6 font-poppins">{t('enterPasswordToAccessTestPage')}</p>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" aria-modal="true" role="dialog">
+      <div className="w-full max-w-sm bg-gradient-to-b from-[#2a070b] to-[#1a0204] text-gray-200 rounded-2xl p-6 md:p-8 flex flex-col animate-fade-in shadow-2xl shadow-red-500/20 border border-red-500/20">
+        <h1 className="text-2xl font-russo text-center text-red-400 mb-2 uppercase">{t('adminAccess')}</h1>
+        <p className="text-center text-gray-400 mb-6 font-poppins">{t('enterPasswordToAccessTestPage')}</p>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -55,13 +55,13 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ onClose, onSuccess }) =
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-400 transition duration-300"
+              className="w-full px-4 py-3 bg-black/30 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition duration-300"
               autoFocus
             />
           </div>
           
           {error && (
-            <div className="p-3 rounded-lg text-center text-sm bg-red-100 text-red-700 border border-red-200">
+            <div className="p-3 rounded-lg text-center text-sm bg-red-500/10 text-red-300 border border-red-500/30">
                 {error}
             </div>
           )}
@@ -70,14 +70,14 @@ const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ onClose, onSuccess }) =
             <button
               type="button"
               onClick={onClose}
-              className="py-3 bg-transparent border-2 border-gray-300 rounded-xl text-gray-500 font-russo font-bold text-lg hover:bg-gray-100 transition duration-300"
+              className="py-3 bg-transparent border-2 border-gray-500/60 rounded-xl text-gray-300 font-russo font-bold text-lg hover:bg-gray-500/10 transition duration-300"
             >
               {t('cancel')}
             </button>
             <button
               type="submit"
               disabled={isLoading || !password}
-              className="py-3 bg-[#f8d7da] rounded-xl text-[#e51e2a] font-russo font-bold text-lg tracking-wider hover:bg-[#f6c8cc] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+              className="py-3 bg-gradient-to-b from-red-500 to-red-700 rounded-xl text-white font-russo font-bold text-lg tracking-wider transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-[0_5px_15px_rgba(255,82,82,0.4)]"
             >
               {isLoading ? t('verifying') : t('submit')}
             </button>

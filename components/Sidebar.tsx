@@ -103,10 +103,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
   return (
     <>
         <div 
-            className={`fixed inset-0 bg-red-900/30 backdrop-blur-sm z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             onClick={onClose}
         />
-        <div className={`fixed top-0 left-0 h-full w-72 bg-white text-gray-800 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col`}>
+        <div className={`fixed top-0 left-0 h-full w-72 bg-[#1f0407] text-gray-200 border-r border-red-500/20 shadow-2xl shadow-red-900 z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} flex flex-col`}>
             <input
                 type="file"
                 ref={fileInputRef}
@@ -119,27 +119,27 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                     <div className="flex items-center gap-3">
                         <button
                             onClick={handleProfilePicClick}
-                            className="w-12 h-12 flex-shrink-0 bg-gray-100 border-2 border-gray-200 rounded-full group relative disabled:cursor-not-allowed flex items-center justify-center"
+                            className="w-12 h-12 flex-shrink-0 bg-black/20 border-2 border-red-500/30 rounded-full group relative disabled:cursor-not-allowed flex items-center justify-center"
                             disabled={!isLoggedIn}
                             aria-label={t('changeProfilePic')}
                         >
                             {profilePic ? (
                                 <img src={profilePic} alt={t('profileAlt')} className="w-full h-full rounded-full object-cover" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                             ) : (
-                                <UserIcon className="w-8 h-8 text-red-500" />
+                                <UserIcon className="w-8 h-8 text-red-400" />
                             )}
                             {isLoggedIn && (
-                                <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
                                     <PencilIcon className="w-6 h-6 text-white" />
                                 </div>
                             )}
                         </button>
                         <div>
-                            <p className="font-bold text-lg text-gray-800 truncate max-w-40">{playerId ? t('welcomeUser', {playerId}) : t('welcome')}</p>
-                            <p className="text-sm text-gray-500">Aviator Predictor Pro</p>
+                            <p className="font-bold text-lg text-white truncate max-w-40">{playerId ? t('welcomeUser', {playerId}) : t('welcome')}</p>
+                            <p className="text-sm text-gray-400">Aviator Predictor Pro</p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 rounded-full text-gray-500 hover:bg-red-100">
+                    <button onClick={onClose} className="p-2 rounded-full text-gray-400 hover:bg-white/10">
                         <CloseIcon className="w-6 h-6"/>
                     </button>
                 </div>
@@ -150,14 +150,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                     <button 
                         onClick={() => onNavigate('predictor')}
                         disabled={!isLoggedIn}
-                        className="flex items-center gap-4 p-3 rounded-lg text-left text-gray-700 hover:bg-red-100 hover:text-red-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:text-gray-400"
+                        className="flex items-center gap-4 p-3 rounded-lg text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:text-gray-500"
                     >
                         <HomeIcon className="w-6 h-6"/>
                         <span className="font-semibold">{t('predictorHome')}</span>
                     </button>
                     <button 
                         onClick={onTestPostbackClick}
-                        className="flex items-center gap-4 p-3 rounded-lg text-left text-gray-700 hover:bg-red-100 hover:text-red-500 transition-colors duration-200"
+                        className="flex items-center gap-4 p-3 rounded-lg text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors duration-200"
                     >
                         <TestIcon className="w-6 h-6"/>
                         <span className="font-semibold">{t('testPostback')}</span>
@@ -166,7 +166,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                         <div>
                             <button
                                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                                className="w-full flex items-center justify-between gap-4 p-3 rounded-lg text-left text-gray-700 hover:bg-red-100 hover:text-red-500 transition-colors duration-200"
+                                className="w-full flex items-center justify-between gap-4 p-3 rounded-lg text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors duration-200"
                             >
                                 <div className="flex items-center gap-4">
                                     <LanguageIcon className="w-6 h-6" />
@@ -177,12 +177,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                                 </svg>
                             </button>
                             {isLangMenuOpen && (
-                                <div className="mt-2 pl-4 max-h-60 overflow-y-auto">
+                                <div className="mt-2 pl-4 max-h-60 overflow-y-auto rounded-lg bg-black/20 p-2">
                                     {languages.map((lang) => (
                                         <button
                                             key={lang.code}
                                             onClick={() => handleLanguageSelect(lang.code)}
-                                            className={`w-full text-left p-2 rounded-md text-sm transition-colors ${language === lang.code ? 'bg-red-100 text-red-600' : 'text-gray-600 hover:bg-red-50'}`}
+                                            className={`w-full text-left p-2 rounded-md text-sm transition-colors ${language === lang.code ? 'bg-red-500/20 text-white' : 'text-gray-300 hover:bg-white/5'}`}
                                         >
                                             {lang.flag} {lang.name}
                                         </button>
@@ -194,13 +194,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                 </div>
             </nav>
             
-            <div className="p-4 border-t border-red-100 flex-shrink-0">
+            <div className="p-4 border-t border-red-500/20 flex-shrink-0">
                 <div className="flex items-center justify-between">
                     <div>
                         {isLoggedIn && (
                             <button 
                                 onClick={onLogout}
-                                className="flex items-center gap-4 p-3 rounded-lg text-left text-gray-700 hover:bg-red-100 hover:text-red-500 transition-colors duration-200"
+                                className="flex items-center gap-4 p-3 rounded-lg text-left text-gray-300 hover:bg-white/5 hover:text-white transition-colors duration-200"
                             >
                                 <LogoutIcon className="w-6 h-6"/>
                                 <span className="font-semibold">{t('logout')}</span>
@@ -211,7 +211,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, onLogout
                         <img 
                             src="https://i.postimg.cc/YSBsSRCd/Picsart-25-11-01-11-32-07-745.png" 
                             alt="NexusPlay Logo" 
-                            className="h-6 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
+                            className="h-6 opacity-40 group-hover:opacity-80 transition-opacity duration-200"
                             draggable="false" onContextMenu={(e) => e.preventDefault()}
                         />
                     </div>

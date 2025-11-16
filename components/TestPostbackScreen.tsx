@@ -94,26 +94,26 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col text-gray-800">
+    <div className="w-full h-full flex flex-col text-gray-200">
       <header className="flex items-center mb-4 flex-shrink-0">
         <div className="w-10">
-          <button onClick={onBack} className="p-2 rounded-full text-gray-600 hover:bg-red-100" aria-label={t('goBack')}>
+          <button onClick={onBack} className="p-2 rounded-full text-gray-300 hover:bg-white/10" aria-label={t('goBack')}>
             <ArrowLeftIcon className="w-6 h-6" />
           </button>
         </div>
-        <h1 className="text-xl md:text-2xl font-russo text-[#e51e2a] tracking-wide text-center flex-grow uppercase">{t('postbackTestingTool')}</h1>
+        <h1 className="text-xl md:text-2xl font-russo text-red-400 tracking-wide text-center flex-grow uppercase">{t('postbackTestingTool')}</h1>
         <div className="w-10"></div>
       </header>
 
       <div className="flex-grow overflow-y-auto px-1">
-        <p className="text-center text-gray-500 text-sm mb-4 font-poppins">
+        <p className="text-center text-gray-400 text-sm mb-4 font-poppins">
           {t('postbackToolDescription')}
         </p>
         
         <div className="text-center mb-6">
             <button
                 onClick={() => setShowGuide(true)}
-                className="px-4 py-2 text-sm bg-red-50 text-red-600 font-semibold rounded-lg hover:bg-red-100 transition-colors"
+                className="px-4 py-2 text-sm bg-red-500/10 text-red-300 font-semibold rounded-lg hover:bg-red-500/20 transition-colors"
             >
                 {t('viewSetupGuide')}
             </button>
@@ -121,7 +121,7 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
 
         <div className="space-y-4">
           <div>
-            <label htmlFor="userIdTest" className="text-sm font-semibold text-gray-600 font-poppins">
+            <label htmlFor="userIdTest" className="text-sm font-semibold text-gray-400 font-poppins">
               {t('userIdToTest')}
             </label>
             <input
@@ -130,17 +130,17 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               placeholder="testuser123"
-              className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-400 transition duration-300"
+              className="mt-2 w-full px-4 py-3 bg-black/30 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition duration-300"
             />
           </div>
           
           {error && (
-              <div className="p-3 rounded-lg text-center text-sm bg-red-100 text-red-700 border border-red-200">
+              <div className="p-3 rounded-lg text-center text-sm bg-red-500/10 text-red-300 border border-red-500/30">
                   {error}
               </div>
           )}
           {message && (
-              <div className="p-3 rounded-lg text-center text-sm bg-green-100 text-green-700 border border-green-200">
+              <div className="p-3 rounded-lg text-center text-sm bg-green-500/10 text-green-300 border border-green-500/30">
                   {message}
               </div>
           )}
@@ -148,42 +148,42 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
           <button
             onClick={() => handleAction(authService.testRegistration)}
             disabled={isLoading}
-            className="w-full py-3 bg-transparent border-2 border-[#e51e2a] rounded-xl text-[#e51e2a] font-russo font-bold text-lg hover:bg-red-50 disabled:opacity-70 transition duration-300"
+            className="w-full py-3 bg-transparent border-2 border-red-500/60 rounded-xl text-red-400 font-russo font-bold text-lg hover:bg-red-500/10 disabled:opacity-70 transition duration-300"
           >
             {t('testRegistration')}
           </button>
           <button
             onClick={() => handleAction(authService.testFirstDeposit, 10)}
             disabled={isLoading}
-            className="w-full py-3 bg-transparent border-2 border-[#e51e2a] rounded-xl text-[#e51e2a] font-russo font-bold text-lg hover:bg-red-50 disabled:opacity-70 transition duration-300"
+            className="w-full py-3 bg-transparent border-2 border-red-500/60 rounded-xl text-red-400 font-russo font-bold text-lg hover:bg-red-500/10 disabled:opacity-70 transition duration-300"
           >
             {t('testFirstDeposit')}
           </button>
           <button
             onClick={() => handleAction(authService.testReDeposit, 5)}
             disabled={isLoading}
-            className="w-full py-3 bg-transparent border-2 border-[#e51e2a] rounded-xl text-[#e51e2a] font-russo font-bold text-lg hover:bg-red-50 disabled:opacity-70 transition duration-300"
+            className="w-full py-3 bg-transparent border-2 border-red-500/60 rounded-xl text-red-400 font-russo font-bold text-lg hover:bg-red-500/10 disabled:opacity-70 transition duration-300"
           >
             {t('testReDeposit')}
           </button>
 
-          <div className="w-1/4 h-px bg-red-200 my-3 mx-auto"></div>
+          <div className="w-1/4 h-px bg-red-500/20 my-3 mx-auto"></div>
 
           <button
             onClick={() => handleAction(authService.clearUserData)}
             disabled={isLoading}
-            className="w-full py-3 bg-transparent border-2 border-gray-400 rounded-xl text-gray-500 font-russo font-bold text-lg hover:bg-gray-100 disabled:opacity-70 transition duration-300"
+            className="w-full py-3 bg-transparent border-2 border-gray-500/60 rounded-xl text-gray-400 font-russo font-bold text-lg hover:bg-gray-500/10 disabled:opacity-70 transition duration-300"
           >
             {t('clearUserData')}
           </button>
         </div>
         
         {/* --- NEW PROMO CODE SECTION --- */}
-        <div className="w-1/2 h-px bg-red-200 my-6 mx-auto"></div>
+        <div className="w-1/2 h-px bg-red-500/20 my-6 mx-auto"></div>
         <div className="space-y-4 pb-4">
-          <h2 className="text-center font-russo text-lg text-gray-700">{t('updatePromoCode')}</h2>
+          <h2 className="text-center font-russo text-lg text-gray-300">{t('updatePromoCode')}</h2>
           <div>
-            <label htmlFor="newPromoCode" className="text-sm font-semibold text-gray-600 font-poppins">
+            <label htmlFor="newPromoCode" className="text-sm font-semibold text-gray-400 font-poppins">
               {t('newPromoCode')}
             </label>
             <input
@@ -192,11 +192,11 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
               value={newPromoCode}
               onChange={(e) => setNewPromoCode(e.target.value)}
               placeholder="NEWPROMO25"
-              className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-400 transition duration-300"
+              className="mt-2 w-full px-4 py-3 bg-black/30 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition duration-300"
             />
           </div>
           <div>
-            <label htmlFor="adminPassword" className="text-sm font-semibold text-gray-600 font-poppins">
+            <label htmlFor="adminPassword" className="text-sm font-semibold text-gray-400 font-poppins">
               {t('adminPassword')}
             </label>
             <input
@@ -205,17 +205,17 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
               value={adminPassword}
               onChange={(e) => setAdminPassword(e.target.value)}
               placeholder="••••••••"
-              className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red-400 transition duration-300"
+              className="mt-2 w-full px-4 py-3 bg-black/30 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition duration-300"
             />
           </div>
 
           {updateError && (
-            <div className="p-3 rounded-lg text-center text-sm bg-red-100 text-red-700 border border-red-200">
+            <div className="p-3 rounded-lg text-center text-sm bg-red-500/10 text-red-300 border border-red-500/30">
               {updateError}
             </div>
           )}
           {updateMessage && (
-            <div className="p-3 rounded-lg text-center text-sm bg-green-100 text-green-700 border border-green-200">
+            <div className="p-3 rounded-lg text-center text-sm bg-green-500/10 text-green-300 border border-green-500/30">
               {updateMessage}
             </div>
           )}
@@ -223,7 +223,7 @@ const TestPostbackScreen: React.FC<TestPostbackScreenProps> = ({ onBack }) => {
           <button
             onClick={handleUpdatePromoCode}
             disabled={isUpdating}
-            className="w-full py-3 bg-[#e51e2a] rounded-xl text-white font-russo font-bold text-lg hover:bg-red-700 disabled:opacity-70 transition duration-300"
+            className="w-full py-3 bg-gradient-to-b from-red-500 to-red-700 rounded-xl text-white font-russo font-bold text-lg hover:bg-red-700 disabled:opacity-70 transition duration-300 shadow-[0_5px_15px_rgba(255,82,82,0.4)]"
           >
             {isUpdating ? t('updating') : t('updatePromocodeButton')}
           </button>

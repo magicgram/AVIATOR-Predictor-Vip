@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
   return (
     <LanguageProvider>
-      <div className="min-h-screen text-white font-sans flex items-center justify-center bg-[#e51e2a]">
+      <div className="min-h-screen text-white font-sans flex items-center justify-center bg-gradient-to-b from-[#3a0a0f] to-[#1a0204]">
         {showOnboarding && <OnboardingModal onClose={handleOnboardingClose} />}
         {user ? (
           <PredictorScreen 

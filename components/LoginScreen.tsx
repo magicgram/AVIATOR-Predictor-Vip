@@ -21,7 +21,7 @@ const GuideIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const UserIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-black" viewBox="0 0 20 20" fill="currentColor">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
       <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
     </svg>
 );
@@ -36,7 +36,7 @@ const DepositMessage: React.FC<{
   return (
     <div className="w-full max-w-sm mx-auto text-white text-center animate-fade-in-up">
       <h2 className="text-2xl font-bold mb-4">{t('depositMessageTitle')}</h2>
-      <div className="mb-6 font-poppins space-y-3">
+      <div className="mb-6 font-poppins space-y-3 text-gray-300">
           <p>{t('depositMessageSync')}</p>
           <p>{t('depositMessageDeposit')}</p>
           <p>{t('depositMessageAccess')}</p>
@@ -45,11 +45,11 @@ const DepositMessage: React.FC<{
         <button
           onClick={onRegister}
           disabled={isRegistering}
-          className="w-full py-3 bg-white rounded-lg text-red-500 font-bold text-lg hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 shadow-[0_4px_10px_rgba(150,20,20,0.4)]"
+          className="w-full py-4 bg-gradient-to-b from-red-500 to-red-700 rounded-xl text-white font-russo font-bold text-xl tracking-wider uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_5px_20px_rgba(255,82,82,0.5)] hover:shadow-[0_5px_30px_rgba(255,82,82,0.7)] hover:scale-105 active:scale-100"
         >
           {isRegistering ? (
             <div className="flex justify-center items-center">
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
@@ -63,7 +63,7 @@ const DepositMessage: React.FC<{
         </button>
         <button
           onClick={onBack}
-          className="w-full py-3 bg-transparent border-2 border-white/50 rounded-lg text-white font-semibold text-lg hover:bg-white/10 transition duration-300"
+          className="w-full py-3 bg-white/5 border-2 border-white/20 rounded-xl text-white font-semibold text-lg hover:bg-white/10 transition duration-300"
         >
           {t('back').toUpperCase()}
         </button>
@@ -90,16 +90,16 @@ const ReDepositMessage: React.FC<{
   return (
     <div className="w-full max-w-sm mx-auto text-white text-center animate-fade-in-up">
       <h2 className="text-2xl font-bold mb-4">{t('reDepositMessageTitle')}</h2>
-      <p className="mb-6 font-poppins">{t('reDepositMessageContinue')}</p>
+      <p className="mb-6 font-poppins text-gray-300">{t('reDepositMessageContinue')}</p>
       <div className="space-y-4">
         <button
           onClick={onRegister}
           disabled={isRegistering}
-          className="w-full py-3 bg-white rounded-lg text-red-500 font-bold text-lg hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 shadow-[0_4px_10px_rgba(150,20,20,0.4)]"
+          className="w-full py-4 bg-gradient-to-b from-red-500 to-red-700 rounded-xl text-white font-russo font-bold text-xl tracking-wider uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_5px_20px_rgba(255,82,82,0.5)] hover:shadow-[0_5px_30px_rgba(255,82,82,0.7)] hover:scale-105 active:scale-100"
         >
           {isRegistering ? (
             <div className="flex justify-center items-center">
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
@@ -113,7 +113,7 @@ const ReDepositMessage: React.FC<{
         </button>
         <button
           onClick={onBack}
-          className="w-full py-3 bg-transparent border-2 border-white/50 rounded-lg text-white font-semibold text-lg hover:bg-white/10 transition duration-300"
+          className="w-full py-3 bg-white/5 border-2 border-white/20 rounded-xl text-white font-semibold text-lg hover:bg-white/10 transition duration-300"
         >
           {t('back').toUpperCase()}
         </button>
@@ -210,7 +210,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onOpenGuide, 
   const handleBackFromReDeposit = useCallback(() => setNeedsReDeposit(false), []);
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-between relative overflow-hidden bg-[#e51e2a]">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       {needsDeposit ? (
           <div className="flex-grow flex items-center justify-center p-4">
             <DepositMessage onBack={handleBackFromDeposit} onRegister={handleRegister} isRegistering={isRegistering} />
@@ -230,15 +230,15 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onOpenGuide, 
                 </button>
             </header>
 
-            <div className="w-full max-w-sm flex flex-col items-center z-10 px-4 pt-12 sm:pt-16">
-                <img src="https://i.postimg.cc/d0V9DrJY/Picsart-25-11-04-16-01-32-557.png" alt="Aviator Predictor Pro" className="w-48 object-contain -mb-2" draggable="false" onContextMenu={(e) => e.preventDefault()} />
-                <h1 className="font-luckiest text-[2.5rem] leading-none text-white tracking-wide text-center" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>
+            <main className="w-full max-w-sm flex flex-col items-center z-10 px-4 pt-12 sm:pt-16 flex-grow justify-center">
+                <img src="https://i.postimg.cc/d0V9DrJY/Picsart-25-11-04-16-01-32-557.png" alt="Aviator Predictor Pro" className="w-48 object-contain -mb-2 drop-shadow-[0_10px_15px_rgba(255,50,50,0.3)]" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <h1 className="font-luckiest text-[2.5rem] leading-none text-white tracking-wide text-center" style={{ textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>
                     AVIATOR PREDICTOR PRO
                 </h1>
 
                 <div className="w-full flex flex-col items-center space-y-5 mt-12 sm:mt-16">
                     <div className="w-full">
-                        <label htmlFor="playerId" className="font-poppins text-white text-xs font-bold mb-1.5 block text-left tracking-widest">
+                        <label htmlFor="playerId" className="font-poppins text-white/80 text-xs font-bold mb-1.5 block text-left tracking-widest">
                             {t('playerIdLabel').toUpperCase()}
                         </label>
                         <div className="relative flex items-center">
@@ -251,7 +251,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onOpenGuide, 
                                 value={playerId}
                                 onChange={(e) => setPlayerId(e.target.value)}
                                 placeholder="12345678"
-                                className="w-full pl-12 pr-4 py-3.5 bg-white border-0 rounded-xl text-black placeholder-gray-500 font-sans text-lg focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-300 shadow-md"
+                                className="w-full pl-12 pr-4 py-3.5 bg-black/30 border border-white/20 rounded-xl text-white placeholder-gray-400 font-sans text-lg focus:outline-none focus:ring-2 focus:ring-red-500/50 transition duration-300 shadow-md"
                             />
                         </div>
                     </div>
@@ -259,11 +259,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onOpenGuide, 
                     <button
                         onClick={handleContinue}
                         disabled={isLoading || !playerId}
-                        className="w-full py-3 bg-[#f8d7da] rounded-xl text-[#e51e2a] font-russo font-bold text-xl tracking-wider hover:bg-[#f6c8cc] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+                        className="w-full py-4 bg-gradient-to-b from-red-500 to-red-700 rounded-xl text-white font-russo font-bold text-xl tracking-wider uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_5px_20px_rgba(255,82,82,0.5)] hover:shadow-[0_5px_30px_rgba(255,82,82,0.7)] hover:scale-105 active:scale-100"
                     >
                         {isLoading ? (
                             <div className="flex justify-center items-center h-[28px]">
-                                <svg className="animate-spin h-5 w-5 text-[#b20e17]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
@@ -275,21 +275,23 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onOpenGuide, 
                 </div>
                 
                 {error && (
-                    <div className="w-full mt-4 p-3 rounded-md text-center text-sm bg-red-800/80 text-white border border-red-600 font-poppins">
+                    <div className="w-full mt-4 p-3 rounded-md text-center text-sm bg-red-500/10 text-red-300 border border-red-500/30 font-poppins">
                         {error}
                     </div>
                 )}
+            </main>
 
-                <div className="w-full text-center mt-8">
-                    <p className="font-poppins text-white text-xs mb-2 font-bold tracking-wider">{t('dontHaveAccount').toUpperCase()}</p>
+            <footer className="w-full max-w-sm z-10 px-4 pb-8">
+                <div className="w-full text-center">
+                    <p className="font-poppins text-white/80 text-xs mb-2 font-bold tracking-wider">{t('dontHaveAccount').toUpperCase()}</p>
                     <button
                         onClick={handleRegister}
                         disabled={isRegistering}
-                        className="w-full py-3 bg-white rounded-xl text-[#e51e2a] font-russo font-bold text-xl tracking-wider hover:bg-gray-200 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+                        className="w-full py-4 bg-white/10 border-2 border-white/20 rounded-xl text-white font-russo font-bold text-xl tracking-wider hover:bg-white/20 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
                     >
                         {isRegistering ? (
                             <div className="flex justify-center items-center h-[28px]">
-                                <svg className="animate-spin h-5 w-5 text-[#b20e17]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
@@ -299,32 +301,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onOpenGuide, 
                         )}
                     </button>
                 </div>
-            </div>
-
-            <div className="absolute bottom-[-1px] left-[-1px] right-[-1px] h-[calc(30vh+1px)] z-0 pointer-events-none">
-              <div className="relative w-full h-full">
-                <svg
-                  className="absolute bottom-0 left-0 w-full h-full"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                  style={{ filter: 'drop-shadow(0 -4px 5px rgba(0, 0, 0, 0.15))' }}
-                >
-                  <path d="M0,100 C35,100 70,20 100,20 V100 Z" fill="white" />
-                </svg>
-
-                <div className="absolute bottom-4 right-5 text-center z-10 pointer-events-auto">
-                    <img 
-                        src="https://i.postimg.cc/mZJK0nDd/20251104-203250.png" 
-                        alt="Aviator Predictor Pro" 
-                        className="w-24 opacity-30 mx-auto"
-                        draggable="false" onContextMenu={(e) => e.preventDefault()}
-                    />
-                    <p className="font-luckiest text-sm -mt-3" style={{color: '#c0c0d0', opacity: 0.8}}>
-                      AVIATOR PREDICTOR PRO
-                    </p>
-                </div>
-              </div>
-            </div>
+            </footer>
           </>
       )}
     </div>

@@ -51,64 +51,64 @@ const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
     };
 
   return (
-    <div className="fixed inset-0 bg-red-900/30 backdrop-blur-sm z-50 flex items-center justify-center p-4" aria-modal="true" role="dialog">
-      <div className="w-full max-w-lg bg-white text-gray-800 rounded-2xl p-6 md:p-8 flex flex-col animate-fade-in shadow-2xl">
-        <h1 className="text-3xl font-russo text-center text-[#e51e2a] mb-2 tracking-wide uppercase">{t('howToGetAccess')}</h1>
-        <p className="text-center text-gray-500 mb-6 font-poppins">{t('followStepsToUnlock')}</p>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" aria-modal="true" role="dialog">
+      <div className="w-full max-w-lg bg-gradient-to-b from-[#2a070b] to-[#1a0204] text-gray-200 rounded-2xl p-6 md:p-8 flex flex-col animate-fade-in shadow-2xl shadow-red-500/20 border border-red-500/20">
+        <h1 className="text-3xl font-russo text-center text-red-400 mb-2 tracking-wide uppercase">{t('howToGetAccess')}</h1>
+        <p className="text-center text-gray-400 mb-6 font-poppins">{t('followStepsToUnlock')}</p>
         
         <div className="overflow-y-auto max-h-[60vh] pr-2 font-poppins">
-            <div className="space-y-4 text-gray-700">
-            <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
-                <div className="flex-shrink-0 pt-1 font-bold text-red-500 text-xl">1.</div>
+            <div className="space-y-4 text-gray-300">
+            <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg">
+                <div className="flex-shrink-0 pt-1 font-bold text-red-400 text-xl">1.</div>
                 <div>
                 <p>{t('guideStep1')}</p>
                 </div>
             </div>
-            <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
-                <div className="flex-shrink-0 pt-1 font-bold text-red-500 text-xl">2.</div>
+            <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg">
+                <div className="flex-shrink-0 pt-1 font-bold text-red-400 text-xl">2.</div>
                 <div>
                 <p>{t('guideStep2')}</p>
                 </div>
             </div>
-            <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
-                <div className="flex-shrink-0 pt-1 font-bold text-red-500 text-xl">3.</div>
+            <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg">
+                <div className="flex-shrink-0 pt-1 font-bold text-red-400 text-xl">3.</div>
                 <div>
                 <p>{t('guideStep3')}</p>
                 </div>
             </div>
-            <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg items-center">
-                <div className="flex-shrink-0 font-bold text-red-500 text-xl">4.</div>
+            <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg items-center">
+                <div className="flex-shrink-0 font-bold text-red-400 text-xl">4.</div>
                 <div className="flex-grow">
                 <p>{t('guideStep4')}</p>
-                <div className="mt-2 flex items-center justify-between bg-red-100 p-2 rounded-md">
-                    <span className="font-mono text-lg text-red-600 font-bold">{promoCode}</span>
-                    <button onClick={handleCopy} className="p-1 text-gray-500 hover:text-red-500 transition-colors" aria-label={t('copyPromocode')}>
-                        {copied ? <CheckIcon className="w-5 h-5 text-green-500" /> : <CopyIcon className="w-5 h-5" />}
+                <div className="mt-2 flex items-center justify-between bg-black/30 p-2 rounded-md">
+                    <span className="font-mono text-lg text-red-300 font-bold">{promoCode}</span>
+                    <button onClick={handleCopy} className="p-1 text-gray-400 hover:text-white transition-colors" aria-label={t('copyPromocode')}>
+                        {copied ? <CheckIcon className="w-5 h-5 text-green-400" /> : <CopyIcon className="w-5 h-5" />}
                     </button>
                 </div>
                 </div>
             </div>
             </div>
             
-            <div className="w-full h-px bg-red-200 my-6"></div>
+            <div className="w-full h-px bg-red-500/20 my-6"></div>
 
             <div>
-                <h2 className="text-xl font-russo text-center text-[#e51e2a] mb-4 uppercase">{t('howToFindPlayerId')}</h2>
-                <div className="space-y-4 text-gray-700">
-                    <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
-                        <div className="flex-shrink-0 pt-1 font-bold text-red-500 text-xl">1.</div>
+                <h2 className="text-xl font-russo text-center text-red-400 mb-4 uppercase">{t('howToFindPlayerId')}</h2>
+                <div className="space-y-4 text-gray-300">
+                    <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg">
+                        <div className="flex-shrink-0 pt-1 font-bold text-red-400 text-xl">1.</div>
                         <div><p>{t('playerIdStep1')}</p></div>
                     </div>
-                    <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
-                        <div className="flex-shrink-0 pt-1 font-bold text-red-500 text-xl">2.</div>
+                    <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg">
+                        <div className="flex-shrink-0 pt-1 font-bold text-red-400 text-xl">2.</div>
                         <div><p>{t('playerIdStep2')}</p></div>
                     </div>
-                    <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
-                        <div className="flex-shrink-0 pt-1 font-bold text-red-500 text-xl">3.</div>
+                    <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg">
+                        <div className="flex-shrink-0 pt-1 font-bold text-red-400 text-xl">3.</div>
                         <div><p>{t('playerIdStep3')}</p></div>
                     </div>
-                    <div className="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
-                        <div className="flex-shrink-0 pt-1 font-bold text-red-500 text-xl">4.</div>
+                    <div className="flex items-start gap-4 p-3 bg-black/20 rounded-lg">
+                        <div className="flex-shrink-0 pt-1 font-bold text-red-400 text-xl">4.</div>
                         <div><p>{t('playerIdStep4')}</p></div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ const GuideModal: React.FC<GuideModalProps> = ({ onClose }) => {
         
         <button
           onClick={onClose}
-          className="mt-8 w-full py-3 bg-[#f8d7da] rounded-xl text-[#e51e2a] font-russo font-bold text-xl tracking-wider hover:bg-[#f6c8cc] transition-all duration-200 shadow-lg flex-shrink-0"
+          className="mt-8 w-full py-4 bg-gradient-to-b from-red-500 to-red-700 rounded-xl text-white font-russo font-bold text-xl tracking-wider uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_5px_20px_rgba(255,82,82,0.5)] hover:shadow-[0_5px_30px_rgba(255,82,82,0.7)] hover:scale-105 active:scale-100 flex-shrink-0"
           aria-label={t('closeGuide')}
         >
           {t('gotIt')}
